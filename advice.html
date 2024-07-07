@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalized Self-Help Advice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #2a2a2a;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label, input, textarea, button {
+            margin-bottom: 1rem;
+        }
+        input, textarea, button {
+            padding: 0.5rem;
+            border-radius: 5px;
+            border: none;
+            background-color: #3a3a3a;
+            color: #ffffff;
+        }
+        button {
+            background-color: #4CAF50;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #advice {
+            margin-top: 2rem;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Personalized Self-Help Advice</h1>
+        <form id="adviceForm">
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+
+            <label for="gender">Gender:</label>
+            <input type="text" id="gender" name="gender" required>
+
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" required>
+
+            <label for="jobRole">Job Role:</label>
+            <input type="text" id="jobRole" name="jobRole" required>
+
+            <label for="jobIndustry">Job Industry:</label>
+            <input type="text" id="jobIndustry" name="jobIndustry" required>
+
+            <label for="situation">Situation you're struggling with:</label>
+            <textarea id="situation" name="situation" rows="4" required></textarea>
+
+            <label for="book">Favorite Self-Help Book:</label>
+            <input type="text" id="book" name="book" required>
+
+            <button type="submit">Get Advice</button>
+        </form>
+        <div id="advice"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const form = document.getElementById('adviceForm');
+        const adviceDiv = document.getElementById('advice');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+
+            try {
+                const response = await axios.post('https://api.groq.com/openai/v1/chat/completions', {
+                    model: "mixtral-8x7b-32768",
+                    messages: [{
+                        role: "system",
+                        content: "You are an empathetic and knowledgeable self-help advisor. Your task is to provide personalized, actionable advice based on the user's information and their favorite self-help book. After the advice, recommend 3 relevant books that could further help the user."
+                    }, {
+                        role: "user",
+                        content: `Generate personalized advice based on the following information:
+                        Age: ${data.age}
+                        Gender: ${data.gender}
+                        Location: ${data.location}
+                        Job Role: ${data.jobRole}
+                        Job Industry: ${data.jobIndustry}
+                        Situation: ${data.situation}
+                        Favorite Self-Help Book: ${data.book}
+
+                        Please structure your response as follows:
+
+                        Personalized advice for you:
+
+                        Understanding Your Situation
+                        *You are [briefly summarize the situation they are struggling with].*
+
+                        1. Key Insights from [Favorite Self-Help Book]
+                        *In [Favorite Self-Help Book], [Author] emphasizes the importance of [key principle or idea from the book]. This is particularly relevant to your situation because:*
+                        - [explain how it relates in bullet points]
+
+                        2. Actionable Steps
+                        Based on your favorite self-help book and your personal details, here are some actionable steps you can take:
+
+                        1. **Step 1:** [Specific, actionable advice derived from the self-help book, tailored to their situation].
+                           * *Example:* [Provide a concrete example of how to implement this step]
+
+                        2. **Step 2:** [Another piece of actionable advice].
+                           * *Example:* [Provide a concrete example of how to implement this step]
+
+                        3. **Step 3:** [Additional actionable advice].
+                           * *Example:* [Provide a concrete example of how to implement this step]
+
+                        3. Encouragement and Support
+                        *Remember, [motivational quote or encouraging statement from the book]. Stay focused on [specific positive outcome], and take it one step at a time.*
+
+                        Books That Might Better Suit Your Needs:
+                        1. [Book Title 1] by [Author]: [Brief explanation of why this book is recommended]
+                        2. [Book Title 2] by [Author]: [Brief explanation of why this book is recommended]
+                        3. [Book Title 3] by [Author]: [Brief explanation of why this book is recommended]
+
+                        Ensure your advice is compassionate, practical, and tailored to the user's specific circumstances.`
+                    }],
+                }, {
+                    headers: {
+                        'Authorization': 'Bearer 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',
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                const advice = response.data.choices[0].message.content;
+                adviceDiv.innerHTML = advice.replace(/\n/g, '<br>');
+            } catch (error) {
+                console.error('Error:', error);
+                adviceDiv.textContent = 'An error occurred while generating advice. Please try again.';
+            }
+        });
+    </script>
+</body>
+</html>

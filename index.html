@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalized Self Help</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #000000;
+            color: white;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .site-name {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+        }
+
+        .built-by {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: 2px solid #8a2be2;
+            border-radius: 30px;
+            transition: background-color 0.3s ease;
+        }
+
+        .built-by a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .built-by:hover {
+            background-color: rgba(138, 43, 226, 0.4);
+        }
+
+        h1 {
+            font-size: 4vw;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #8a2be2;
+            padding-bottom: 20px;
+        }
+
+        .action-button {
+            display: inline-block;
+            width: 200px;
+            margin: 20px;
+            padding: 15px;
+            background-color: #8a2be2;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+            border: 2px solid #8a2be2;
+        }
+
+        .action-button:hover {
+            background-color: #6a1cb1;
+        }
+
+        .stats {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin: 60px 0;
+        }
+
+        .option {
+            background-color: rgba(138, 43, 226, 0.2);
+            padding: 30px;
+            border-radius: 15px;
+            width: 45%;
+            margin: 10px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid #8a2be2;
+        }
+
+        .option:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .support-section {
+            margin-top: 60px;
+        }
+
+        .donate-button {
+            display: inline-block;
+            background-color: #8a2be2;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 18px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+            border: 2px solid #8a2be2;
+        }
+
+        .donate-button:hover {
+            background-color: #6a1cb1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="site-name">youshouldtakeaction</div>
+        <div class="built-by">
+            <a href="https://x.com/moghalsaifa" target="_blank">built by @moghalsaifa</a>
+        </div>
+        <h1>Unlock the Potential of Personalized Self Help</h1>
+        <a href="#" class="action-button">Take Action</a>
+        <div class="stats">
+            <p>80% of the people who read self-help books don't use the advice.<br>You can choose to be different.</p>
+        </div>
+        <div class="options">
+            <div class="option">
+                <h3>Personalized Actionable Advice</h3>
+            </div>
+            <div class="option">
+                <h3>From your Favorite Self Help books</h3>
+            </div>
+        </div>
+        <div class="support-section">
+            <h3>Support our mission</h3>
+            <p>Help us give you better advice by donating</p>
+            <a href="https://razorpay.me/@moghalsaifaliullah" class="donate-button" target="_blank">Donate as you wish</a>
+        </div>
+    </div>
+</body>
+</html>
